@@ -2,6 +2,7 @@ package com.milton.evenflow.controller;
 
 import com.milton.evenflow.model.CommentResponse;
 import com.milton.evenflow.model.CommentRequest;
+import com.milton.evenflow.service.WidgetService;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -14,17 +15,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
-
 @RestController
 @RequestMapping("/api/v1")
 @Validated
 public class WidgetsController {
 
     private final WebClient webClient;
+    private final WidgetService widgetService;
 
-    public WidgetsController(WebClient webClient) {
+    public WidgetsController(WebClient webClient, WidgetService widgetService) {
         this.webClient = webClient;
+        this.widgetService = widgetService;
     }
 
     @GetMapping("/users/{id}")
@@ -42,15 +43,6 @@ public class WidgetsController {
 
     @GetMapping(value = "/comments", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<CommentResponse> getComments(@Valid CommentRequest commentRequest) {
-
-        String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/comments")
-                .queryParam("postId", commentRequest.getPostId())
-                .toUriString();
-
-        return webClient.get()
-                .uri(uriString)
-                .retrieve()
-                .bodyToFlux(CommentResponse.class)
-                .delayElements(Duration.ofSeconds(Long.parseLong(commentRequest.getDelay())));
+        return widgetService.getComments(commentRequest.getPostId(), commentRequest.getDelay());
     }
 }
