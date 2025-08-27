@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: evenflow
+logging:
+  level:
+    reactor:
+      netty:
+        http:
+          client: DEBUG
