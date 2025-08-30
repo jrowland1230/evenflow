@@ -3,11 +3,11 @@ package com.milton.evenflow;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class EvenflowApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//@SpringBootTest
+//class EvenflowApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}

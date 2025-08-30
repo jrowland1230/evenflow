@@ -1,8 +1,11 @@
 package com.milton.evenflow.service;
 
-import com.milton.evenflow.model.CommentResponse;
+import com.milton.evenflow.model.Comment;
+import com.milton.evenflow.model.User;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface WidgetService {
-    Flux<CommentResponse> getComments(String postId, Long delay);
+    Mono<User> getUsers(String postId);
+    Flux<Comment> getComments(String postId, Long delay);
 }

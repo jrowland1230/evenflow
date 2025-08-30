@@ -1,11 +1,13 @@
 package com.milton.evenflow.service.impl;
 
 import com.milton.evenflow.gateway.TypicodeGateway;
-import com.milton.evenflow.model.CommentResponse;
+import com.milton.evenflow.model.Comment;
+import com.milton.evenflow.model.User;
 import com.milton.evenflow.service.WidgetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
@@ -18,7 +20,12 @@ public class WidgetServiceImpl implements WidgetService {
     }
 
     @Override
-    public Flux<CommentResponse> getComments(String postId, Long delay) {
+    public Mono<User> getUsers(String postId) {
+        return typicodeGateway.getUsers(postId);
+    }
+
+    @Override
+    public Flux<Comment> getComments(String postId, Long delay) {
         return typicodeGateway.getComments(postId, delay);
     }
 }
