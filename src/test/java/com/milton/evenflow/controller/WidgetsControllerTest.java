@@ -47,7 +47,7 @@ class WidgetsControllerTest {
                 .build()).build();
 
         Mono<User> mockMono = Mono.just(user);
-        Mockito.when(widgetService.getUsers("1")).thenReturn(mockMono);
+        Mockito.when(widgetService.getUsers(1)).thenReturn(mockMono);
 
         webTestClient.get().uri("/api/v1/users/1")
                 .header("Content-Type", "application/json")
@@ -62,7 +62,7 @@ class WidgetsControllerTest {
     @Order(2)
     void testGetComments() {
         CommentRequest request = new CommentRequest();
-        request.setPostId("1");
+        request.setId(1);
         request.setDelay(1L);
 
         Comment response1 = new Comment();
@@ -80,7 +80,7 @@ class WidgetsControllerTest {
 
         Flux<Comment> mockFlux = Flux.just(response1, response2, response3, response4);
 
-        Mockito.when(widgetService.getComments("1",1L)).thenReturn(mockFlux);
+        Mockito.when(widgetService.getComments(1,1L)).thenReturn(mockFlux);
 
         webTestClient.get()
                 .uri(uriBuilder -> uriBuilder

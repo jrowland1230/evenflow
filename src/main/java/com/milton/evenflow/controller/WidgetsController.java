@@ -33,7 +33,7 @@ public class WidgetsController {
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "success"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    public Mono<User> getUsers(@PathVariable String id) {
+    public Mono<User> getUsers(@Valid @PathVariable Integer id) {
         return widgetService.getUsers(id);
     }
 
@@ -43,6 +43,6 @@ public class WidgetsController {
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
     public Flux<Comment> getComments(@Valid CommentRequest commentRequest) {
-        return widgetService.getComments(commentRequest.getPostId(), commentRequest.getDelay());
+        return widgetService.getComments(commentRequest.getId(), commentRequest.getDelay());
     }
 }

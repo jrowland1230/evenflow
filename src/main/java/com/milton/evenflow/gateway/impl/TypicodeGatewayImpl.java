@@ -23,9 +23,9 @@ public class TypicodeGatewayImpl implements TypicodeGateway {
     }
 
     @Override
-    public Mono<User> getUsers(String postId) {
+    public Mono<User> getUsers(Integer id) {
         String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/users/")
-                .path(postId)
+                .path(id.toString())
                 .toUriString(); //TODO add configuration properties for url
 
         return webClient.get()
@@ -41,9 +41,9 @@ public class TypicodeGatewayImpl implements TypicodeGateway {
     }
 
     @Override
-    public Flux<Comment> getComments(String postId, Long delay) {
+    public Flux<Comment> getComments(Integer id, Long delay) {
         String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/comments")
-                .queryParam("postId", postId)
+                .queryParam("postId", id)
                 .toUriString(); //TODO add configuration properties for url
 
         return webClient.get()
