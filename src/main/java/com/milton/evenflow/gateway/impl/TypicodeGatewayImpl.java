@@ -26,7 +26,7 @@ public class TypicodeGatewayImpl implements TypicodeGateway {
     public Mono<User> getUsers(String postId) {
         String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/users/")
                 .path(postId)
-                .toUriString();
+                .toUriString(); //TODO add configuration properties for url
 
         return webClient.get()
                 .uri(uriString)
@@ -44,16 +44,16 @@ public class TypicodeGatewayImpl implements TypicodeGateway {
     public Flux<Comment> getComments(String postId, Long delay) {
         String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/comments")
                 .queryParam("postId", postId)
-                .toUriString();
+                .toUriString(); //TODO add configuration properties for url
 
         return webClient.get()
                 .uri(uriString)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse ->
-                        Mono.error(new Exception())
+                        Mono.error(new Exception()) //TODO add custom exception handling
                 )
                 .onStatus(HttpStatusCode::is5xxServerError, clientResponse ->
-                        Mono.error(new Exception())
+                        Mono.error(new Exception()) //TODO add custom exception handling
                 )
                 .bodyToFlux(Comment.class)
                 .delayElements(Duration.ofSeconds(delay));
