@@ -32,10 +32,10 @@ public class TypicodeGatewayImpl implements TypicodeGateway {
                 .uri(uriString)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse ->
-                        Mono.error(new Exception())
+                        Mono.error(new Exception()) //TODO add custom exception handling
                 )
                 .onStatus(HttpStatusCode::is5xxServerError, clientResponse ->
-                        Mono.error(new Exception())
+                        Mono.error(new Exception()) //TODO add custom exception handling
                 )
                 .bodyToMono(User.class);
     }

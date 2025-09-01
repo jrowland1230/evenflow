@@ -13,5 +13,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleMissingRequestParam(ServerWebInputException ex) {
         String message = "Missing or invalid request parameter: " + ex.getReason();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        //TODO intercept exception and add more details
     }
 }
