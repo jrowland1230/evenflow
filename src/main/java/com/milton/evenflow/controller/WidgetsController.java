@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +29,13 @@ public class WidgetsController {
         this.widgetService = widgetService;
     }
 
-    @GetMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "returns a user for a given id", operationId = "getUsers")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "success"),
             @ApiResponse(responseCode = "400", description = "bad request"),
             @ApiResponse(responseCode = "500", description = "internal server error")})
-    public Mono<User> getUsers(@Valid @PathVariable Integer id) {
-        return widgetService.getUsers(id);
+    public Mono<User> getUser(@Valid @PathVariable @Positive Integer id) {
+        return widgetService.getUser(id);
     }
 
     @GetMapping(value = "/comments", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

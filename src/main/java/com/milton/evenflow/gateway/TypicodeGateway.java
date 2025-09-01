@@ -12,7 +12,7 @@ public interface TypicodeGateway {
      * @param id identifier of user
      * @return user associated with user
      */
-    Mono<User> getUsers(Integer id);
+    Mono<User> getUser(Integer id);
 
     /**
      *

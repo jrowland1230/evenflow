@@ -47,7 +47,7 @@ class WidgetsControllerTest {
                 .build()).build();
 
         Mono<User> mockMono = Mono.just(user);
-        Mockito.when(widgetService.getUsers(1)).thenReturn(mockMono);
+        Mockito.when(widgetService.getUser(1)).thenReturn(mockMono);
 
         webTestClient.get().uri("/api/v1/users/1")
                 .header("Content-Type", "application/json")

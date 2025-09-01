@@ -20,8 +20,8 @@ public class WidgetServiceImpl implements WidgetService {
     }
 
     @Override
-    public Mono<User> getUsers(Integer id) {
-        return typicodeGateway.getUsers(id); //TODO add aditional business logic
+    public Mono<User> getUser(Integer id) {
+        return typicodeGateway.getUser(id); //TODO add aditional business logic
     }
 
     @Override

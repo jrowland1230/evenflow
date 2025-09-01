@@ -23,7 +23,7 @@ public class TypicodeGatewayImpl implements TypicodeGateway {
     }
 
     @Override
-    public Mono<User> getUsers(Integer id) {
+    public Mono<User> getUser(Integer id) {
         String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/users/")
                 .path(id.toString())
                 .toUriString(); //TODO add configuration properties for url
