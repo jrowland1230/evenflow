@@ -21,11 +21,11 @@ public class WidgetServiceImpl implements WidgetService {
 
     @Override
     public Mono<User> getUsers(String postId) {
-        return typicodeGateway.getUsers(postId);
+        return typicodeGateway.getUsers(postId); //TODO add aditional business logic
     }
 
     @Override
     public Flux<Comment> getComments(String postId, Long delay) {
-        return typicodeGateway.getComments(postId, delay);
+        return typicodeGateway.getComments(postId, delay); //TODO add aditional business logic
     }
 }
