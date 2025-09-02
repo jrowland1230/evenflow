@@ -24,38 +24,48 @@ public class TypicodeGatewayImpl implements TypicodeGateway {
 
     @Override
     public Mono<User> getUser(Integer id) {
-        String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/users/")
-                .path(id.toString())
-                .toUriString(); //TODO add configuration properties for url
+        try {
+            String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/users/")
+                    .path(id.toString())
+                    .toUriString(); //TODO add configuration properties for url
 
-        return webClient.get()
-                .uri(uriString)
-                .retrieve()
-                .onStatus(HttpStatusCode::is4xxClientError, clientResponse ->
-                        Mono.error(new Exception()) //TODO add custom exception handling
-                )
-                .onStatus(HttpStatusCode::is5xxServerError, clientResponse ->
-                        Mono.error(new Exception()) //TODO add custom exception handling
-                )
-                .bodyToMono(User.class);
+            return webClient.get()
+                    .uri(uriString)
+                    .retrieve()
+                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse ->
+                            Mono.error(new Exception()) //TODO add custom exception handling
+                    )
+                    .onStatus(HttpStatusCode::is5xxServerError, clientResponse ->
+                            Mono.error(new Exception()) //TODO add custom exception handling
+                    )
+                    .bodyToMono(User.class);
+        } catch (Exception exception) {
+           // TODO add exception details and throw
+            return null;
+        }
     }
 
     @Override
     public Flux<Comment> getComments(Integer id, Long delay) {
-        String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/comments")
-                .queryParam("postId", id)
-                .toUriString(); //TODO add configuration properties for url
+        try {
+            String uriString = UriComponentsBuilder.fromUriString("https://jsonplaceholder.typicode.com/comments")
+                    .queryParam("postId", id)
+                    .toUriString(); //TODO add configuration properties for url
 
-        return webClient.get()
-                .uri(uriString)
-                .retrieve()
-                .onStatus(HttpStatusCode::is4xxClientError, clientResponse ->
-                        Mono.error(new Exception()) //TODO add custom exception handling
-                )
-                .onStatus(HttpStatusCode::is5xxServerError, clientResponse ->
-                        Mono.error(new Exception()) //TODO add custom exception handling
-                )
-                .bodyToFlux(Comment.class)
-                .delayElements(Duration.ofSeconds(delay));
+            return webClient.get()
+                    .uri(uriString)
+                    .retrieve()
+                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse ->
+                            Mono.error(new Exception()) //TODO add custom exception handling
+                    )
+                    .onStatus(HttpStatusCode::is5xxServerError, clientResponse ->
+                            Mono.error(new Exception()) //TODO add custom exception handling
+                    )
+                    .bodyToFlux(Comment.class)
+                    .delayElements(Duration.ofSeconds(delay));
+        } catch (Exception exception) {
+            // TODO add exception details and throw
+            return null;
+        }
     }
 }

@@ -10,7 +10,7 @@ public class CommentRequest {
     @Positive(message = "id must be a positive number")
     private Integer id;
 
-    @Min(value = 1, message = "Delay must be at least 1%")
-    @Max(value = 5, message = "Delay cannot exceed 5%")
+    @Min(value = 0, message = "delay must be at least 1%")
+    @Max(value = 10, message = "delay cannot exceed 5%")
     private Long delay;
 }
